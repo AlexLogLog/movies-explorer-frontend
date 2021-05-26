@@ -63,7 +63,8 @@ function Header() {
                             <button
                                 className="header__profile-button"
                                 src={icon}
-                                alt="Иконка"></button>
+                                alt="Иконка"
+                                onClick={() => history.push('/profile')} ></button>
                         </div>
                     </div>
                 </div>
