@@ -1,0 +1,9 @@
+.movies-like {
+    max-width: 1141px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;   
+    padding-top: 80px;
+    padding-bottom: 247px;
+}

@@ -1,0 +1,122 @@
+.card {
+    width: 364px;
+    height: 285px;
+    background: #FDFDFD;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    border: none;
+}
+
+.card__img {
+    width: 364px;
+    min-height: 200px;
+    margin: 0;
+}
+
+.card__info {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px;
+    margin-bottom: 10px;
+    margin-top: 9px;
+}
+
+.card__info-name {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height */
+    color: #000000;
+    margin: 0;
+}
+
+.card__info-button {
+    background-color: transparent;
+    background-image: url('../../../images/like.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.card__info-butto_saved {
+    background-image: url('../../../images/save.svg');
+}
+
+.card__info-time {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    color: #A0A0A0;
+    margin: 0 16px;
+}
+
+.card__del-button {
+    display: none;
+    background-color: transparent;
+    background-image: url('../../../images/d4.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.card__info:hover .card__del-button {
+    display: inline-block;
+}
+
+@media screen and (max-width:1139px) and (min-width: 768px) {
+    .card {
+        width: 339px;
+        height: 269px;
+    }
+    .card__img {
+        height: 190px;
+        width: 339px;
+    }
+    .card__info {
+        margin-top: 8px;
+        margin-bottom: 7px;
+    }
+    .card__info-name {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 16px;
+    }
+}
+
+@media screen and (max-width:767px) and (min-width: 320px) {
+    .card {
+        width: 300px;
+        height: 265px;
+    }
+    .card__img {
+        width: 300px;
+        height: 168px
+    }
+    .card__info {
+        margin-top: 8px;
+        margin-bottom: 6px;
+    }
+    .card__info-name {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .card__info-time {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 12px;
+    }
+}

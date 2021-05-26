@@ -1,0 +1,117 @@
+.techs {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
+
+.techs__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.techs__heading {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 58px;
+    /* identical to box height, or 116% */
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0;
+    padding-top: 90px;
+    padding-bottom: 26px;
+}
+
+.techs__about {
+    margin: 0;
+    padding-bottom: 100px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    /* or 143% */
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #000000;
+    width: 460px;
+}
+
+.techs__sum {
+    display: flex;
+    flex-direction: row;
+}
+
+.techs__name {
+    max-width: 1140px;
+    margin: 0 auto;
+    background: #E8E8E8;
+    border-radius: 10px;
+    width: 90px;
+    height: 39px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #000000;
+    padding-top: 21px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.techs__name:first-child {
+    margin-left: 0;
+}
+
+@media screen and (max-width:1139px) and (min-width: 768px) {
+    .techs {
+        width: 668px;
+        padding: 90px 0;
+    }
+    .techs__heading {
+        padding-top: 80px;
+        padding-bottom: 22px;
+    }
+    .techs__about {
+        font-size: 12px;
+        line-height: 18px;
+        padding-bottom: 83px;
+    }
+}
+
+@media screen and (max-width:767px) and (min-width: 320px) {
+    .techs {
+        width: 284px;
+        padding: 70px 0;
+    }
+    .techs__heading {
+        padding-top: 60px;
+        padding-bottom: 24px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .techs__about {
+        font-size: 12px;
+        line-height: 18px;
+        padding-bottom: 50px;
+        width: 292px;
+    }
+    .techs__sum {
+        max-width: 200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .techs__name {
+        margin: 0;
+    }
+}

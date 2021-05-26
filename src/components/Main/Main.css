@@ -1,0 +1,14 @@
+.main__fon-baner {
+    background-color: #5C5C5C;
+}
+
+.main__fon-techs {
+    background-color: #F5F5F5;
+}
+
+
+@media screen and (max-width:767px) and (min-width: 320px) {
+    .main__fon-techs {
+        background-color: white;
+    }
+} 
