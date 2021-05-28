@@ -1,0 +1,15 @@
+.root {
+    min-height: 100vh;
+    background: #FFFFFF;
+    font-family: 'Inter', 'Century Gothic', sans-serif;
+}
+
+button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+a:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

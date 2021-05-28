@@ -1,0 +1,137 @@
+.search {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-top: 80px;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 40px;
+}
+
+.search__form {
+    display: flex;
+    margin: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 28px;
+}
+
+.search__form-input {
+    background: #F9F9F9;
+    border-radius: 8px;
+    border: none;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+    color: #A0A0A0;
+    width: 1065px;
+    height: 50px;
+    padding-left: 20px;
+}
+
+.search__form-button {
+    background: #2BE080;
+    background-image: url('../../../images/find.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+    border: none;
+    width: 44px;
+    height: 44px;
+}
+
+.search__switch {
+    position: relative;
+    display: flex;
+    width: 36px;
+    height: 20px;
+    margin: 0 auto;
+    align-items: center;
+    margin-left: calc(50% - 70px);
+}
+
+/* Hide default HTML checkbox */
+
+.search__switch .search__checkbox {
+    display: none;
+}
+
+/* The slider */
+
+.search__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #EBEBEB;
+    transition: .4s;
+}
+
+.search__slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #2BE080;
+    transition: .4s;
+}
+
+.search__checkbox:focus+.search__slider {
+    box-shadow: 0 0 1px white;
+}
+
+.search__checkbox:checked+.search__slider:before {
+    transform: translateX(16px);
+}
+
+.search__slider.search__slider_round {
+    border-radius: 20px;
+    background: #EBEBEB;
+}
+
+.search__slider.search__slider_round:before {
+    border-radius: 50%;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+}
+
+.search__text {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    /* identical to box height, or 150% */
+    color: #000000;
+    padding-left: 48px;
+}
+
+@media screen and (max-width:1139px) and (min-width: 768px) {
+    .search {
+        max-width: 708px;
+    }
+    .search__form {
+        padding-bottom: 40px;
+    }
+    .search__form-input {
+        width: 634px;
+    }
+}
+
+@media screen and (max-width:767px) and (min-width: 320px) {
+    .search {
+        max-width: 292px;
+    }
+    .search__form {
+        padding-bottom: 45px;
+    }
+    .search__form-input {
+        width: 218px;
+    }
+}
