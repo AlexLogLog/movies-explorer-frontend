@@ -1,29 +1,44 @@
 import React from 'react';
 import logo from '../../../images/logo.svg';
 import icon from '../../../images/icon__header.svg'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory, Link } from 'react-router-dom'
 
 
-function Header() {
+function Header({loggedIn, showLikeMovies}) {
     const { pathname } = useLocation();
     const history = useHistory();
+
+    function handleUpdateSearch() {
+        showLikeMovies();
+    }
     function link(from) {
         if ('/' === from) {
-            return (
-                <>
-                    <button
-                        className="header__link_link-not-auth"
-                        onClick={() => history.push('/signup')}
-                    >
-                        Регистрация
+            if (!loggedIn) {
+                return (
+                    <>
+                        <button
+                            className="header__link_link-not-auth"
+                            onClick={() => history.push('/signup')}
+                        >
+                            Регистрация
                       </button>
+                        <button
+                            className="header__link_button-not-auth"
+                            onClick={() => history.push('/signin')}
+                        >
+                            Войти
+                      </button>
+                    </>)
+            } else {
+                return (
                     <button
                         className="header__link_button-not-auth"
-                        onClick={() => history.push('/signin')}
+                        onClick={() => {history.push('/movies')}}
                     >
-                        Войти
-                      </button>
-                </>)
+                        Фильмы
+                    </button>
+                )
+            }
 
         } else if ('/movies' === from || '/saved-movies' === from || '/profile' === from) {
             return (
@@ -34,32 +49,30 @@ function Header() {
                     </label>
                     <div className="header__link-toggle">
                         <div className="header__login-movies">
-                            <a
+                            <Link
                                 className="header__link-login header__link-login_no"
-                                href='/'
+                                to='/'
                             >
                                 Главная
-                        </a>
-                            <a
+                        </Link>
+                            <Link
                                 className="header__link-login header__link-login_active"
-                                href='/movies'
+                                to='/movies'
+                                onClick={() => handleUpdateSearch()}
                             >
                                 Фильмы
-                        </a>
-                            <a
-                                className="header__link-login"
-                                href='/saved-movies'
-                            >
+                        </Link>
+                            <Link to="/saved-movies" className="header__link-login">
                                 Сохранённые фильмы
-                        </a>
+                        </Link>
                         </div>
                         <div className="header__profile">
-                            <a
+                            <Link
                                 className="header__profile-link"
-                                href='/profile'
+                                to='/profile'
                             >
                                 Аккаунт
-                    </a>
+                    </Link>
                             <button
                                 className="header__profile-button"
                                 src={icon}
