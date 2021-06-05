@@ -4,7 +4,7 @@ import icon from '../../../images/icon__header.svg'
 import { useLocation, useHistory, Link } from 'react-router-dom'
 
 
-function Header({loggedIn, showLikeMovies}) {
+function Header({ loggedIn, showLikeMovies }) {
     const { pathname } = useLocation();
     const history = useHistory();
 
@@ -33,7 +33,7 @@ function Header({loggedIn, showLikeMovies}) {
                 return (
                     <button
                         className="header__link_button-not-auth"
-                        onClick={() => {history.push('/movies')}}
+                        onClick={() => { history.push('/movies') }}
                     >
                         Фильмы
                     </button>
@@ -89,7 +89,10 @@ function Header({loggedIn, showLikeMovies}) {
     return (
         <div className="header ">
             <img
-                onClick={() => history.push('/')}
+                onClick={() => {
+                    history.push('/');
+                    handleUpdateSearch()
+                }}
                 className="header__logo"
                 src={logo}
                 alt="Логотип"
