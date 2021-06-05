@@ -176,7 +176,6 @@ function App() {
 
   //удаление из избраного
   function deleteLike(movie) {
-    console.log(movie._id)
     mainApi
       .delMovie(movie, localStorage.token)
       .then((res) => {

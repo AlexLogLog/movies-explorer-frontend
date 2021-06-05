@@ -33,7 +33,6 @@ function Profile(props) {
     function handleSubmit(e) {
         e.preventDefault();
         updateProfile(profile);
-        console.log(profile)
         setValid(false);
     }
 
