@@ -21,7 +21,6 @@ function MoviesCardList(props) {
 
     function handleMoreBtnClick() {
         setCountCards(countMovies + moreMovies);
-        console.log(moreMovies)
     }
 
     React.useEffect(() => {
