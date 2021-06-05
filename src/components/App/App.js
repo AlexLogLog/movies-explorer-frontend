@@ -197,6 +197,7 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     setCurrentUser({});
+    history.push('/')
   }
 
   function showLikeMovies() {
