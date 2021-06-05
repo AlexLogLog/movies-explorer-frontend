@@ -29,6 +29,7 @@ function App() {
   const [loadAllMovies, setLoadAllMovies] = useState(false);
   const [notMovies, setNotMoves] = useState(false);
 
+
   const history = useHistory();
   function preloader() {
     setLoadAllMovies(true);
@@ -178,7 +179,7 @@ function App() {
       .delMovie(movie, localStorage.token)
       .then((res) => {
         const newFindMovies = likeMovies.filter((movieRes) => movieRes._id !== movie._id);
-        const newLikeFindMovies = likeMovies.filter((movieRes) => (movieRes._id !== movie._id) );
+        const newLikeFindMovies = findLikeMovies.filter((movieRes) => (movieRes.owner === currentUser._id)).filter((movieRes) => (movieRes._id !== movie._id));
         setLikeMovies(newFindMovies);
         setFindLikeMovies(newLikeFindMovies);
       })

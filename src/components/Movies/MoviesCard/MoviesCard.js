@@ -50,7 +50,7 @@ function MoviesCard(props) {
                 thumbnail: movie.image.formats.thumbnail.url,
                 movieId: movie.id,
                 nameRU: movie.nameRU,
-                nameEN: movie.nameEN,
+                nameEN: movie.nameEN || "default",
                 owner: currentUser._id,
             });
             setIsCardLikeClicked(true);
