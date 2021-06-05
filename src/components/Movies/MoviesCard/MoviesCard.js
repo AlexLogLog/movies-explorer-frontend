@@ -1,4 +1,4 @@
-import React, { useContext }  from 'react';
+import React, { useContext } from 'react';
 import imageno from '../../../images/not.png';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
@@ -8,10 +8,10 @@ function MoviesCard(props) {
         movie,
         like,
         likeMovies,
-        deleteLike
+        deleteLike,
+        
     } = props;
     const currentUser = useContext(CurrentUserContext);
-
     function time(mins) {
         const hours = Math.trunc(mins / 60);
         const minutes = mins % 60;
@@ -21,10 +21,11 @@ function MoviesCard(props) {
     const [isCardLikeClicked, setIsCardLikeClicked] = React.useState(false);
     const classLike = `${isCardLikeClicked ? "card__info-button card__info-butto_saved" : "card__info-button"
         }`;
-
     const setLikes = React.useCallback(() => {
-        const likesCard = likeMovies.find((movieRes) => movieRes.movieId === movie.id);
-        if (likesCard) {
+        
+        const likeUserSave = likeMovies.find((movieRes) => movieRes.movieId === movie.id);
+        // const likeUser = likeAll.find((movieRes) => movieRes.owner === currentUser._id);
+        if (likeUserSave) {
             setIsCardLikeClicked(true);
         } else {
             setIsCardLikeClicked(false);
@@ -39,7 +40,7 @@ function MoviesCard(props) {
         evt.stopPropagation();
         if (!isCardLikeClicked) {
             like({
-                country: movie.country,
+                country: movie.country || "default",
                 director: movie.director,
                 duration: movie.duration,
                 year: movie.year,
@@ -60,7 +61,6 @@ function MoviesCard(props) {
             setIsCardLikeClicked(false);
         }
     }
-
     return (
         <div className="card">
             <a href={movie.trailerLink} target="_blank" rel="noreferrer">

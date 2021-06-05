@@ -1,8 +1,8 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useWindowSize } from '../../../utils/sizeWin'
+import ButtonElse from '../../Movies/ButtonElse/ButtonElse'
 
-import ButtonElse from '../ButtonElse/ButtonElse';
 
 
 function MoviesCardList(props) {
@@ -14,7 +14,6 @@ function MoviesCardList(props) {
     } = props;
 
 
-
     const [countMovies, setCountCards] = React.useState(0);
     const [moreMovies, setMoreMovies] = React.useState(0);
 
@@ -22,6 +21,7 @@ function MoviesCardList(props) {
 
     function handleMoreBtnClick() {
         setCountCards(countMovies + moreMovies);
+        console.log(moreMovies)
     }
 
     React.useEffect(() => {
@@ -38,7 +38,8 @@ function MoviesCardList(props) {
             setMoreMovies(1);
         }
     }, [windowWidth]);
-    if (moviesFind.length === 0 && !searche) {
+    
+    if (!searche) {
         return (
             <>
                 <div className="movies-like">
@@ -72,7 +73,7 @@ function MoviesCardList(props) {
 
                         moviesFind.slice(0, countMovies).map((movie) =>
                             <MoviesCard
-                                key={movie.id}
+                                key={movie._id}
                                 movie={movie}
                                 deleteLike={deleteLike}
                             >
@@ -86,6 +87,7 @@ function MoviesCardList(props) {
                     more={handleMoreBtnClick}
                     movies={moviesFind}
                     countMovies={countMovies}
+                    text='Не найдено'
                 />
 
             </>

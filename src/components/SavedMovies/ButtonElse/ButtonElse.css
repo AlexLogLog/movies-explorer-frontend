@@ -20,6 +20,26 @@
     color: #000000;
     border: none;
 }
+
+.movies-not__button {
+    width: 320px;
+    height: 36px;
+    margin: 0 auto;
+    background:transparent;
+    border-radius: 6px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #000000;
+}
+
+.movies-not__button_hidden {
+    display: none;
+}
+
 .movies-button__button_hidden {
     display: none;
 }
@@ -31,7 +51,7 @@
     .movies-not__button {
         width: 240px;
     }
-    .movies-button__button {
+    .movies-button__button  {
         width: 240px;
         font-style: normal;
         font-weight: 500;

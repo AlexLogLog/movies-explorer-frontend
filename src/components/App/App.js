@@ -82,7 +82,6 @@ function App() {
       .signin(info)
       .then((token) => {
         if (token) {
-          console.log(' ЦСПЕШНО')
           localStorage.setItem('token', token.token);
           setLoggedIn(true);
           checkToken();
@@ -150,11 +149,13 @@ function App() {
   function searchLikeMovies(text) {
     if (shortCheckbox) {
       setSerche(true);
-      const allFindShortMovies = likeMovies.filter((movie) => (movie.nameRU.toLowerCase().includes(text.toLowerCase())) && (movie.duration <= 40))
+      const likeMoviesNotUser = likeMovies.filter((movieRes) => movieRes.owner === currentUser._id);
+      const allFindShortMovies = likeMoviesNotUser.filter((movie) => (movie.nameRU.toLowerCase().includes(text.toLowerCase())) && (movie.duration <= 40))
       setFindLikeMovies(allFindShortMovies);
     } else {
       setSerche(true);
-      const allFindMovies = likeMovies.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()))
+      const likeMoviesNotUser = likeMovies.filter((movieRes) => movieRes.owner === currentUser._id);
+      const allFindMovies = likeMoviesNotUser.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()))
       setFindLikeMovies(allFindMovies);
     }
   }
@@ -163,13 +164,10 @@ function App() {
   function addMoviesLike(movie) {
     mainApi
       .newMovies(movie, localStorage.token)
-      .then((res) => {
-        mainApi
-          .getMovies(localStorage.token)
-          .then((res) => setLikeMovies(res))
-      })
+      .then((res) => setLikeMovies([...likeMovies, res]))
       .catch((err) => {
         alert(`Ошибка ${err.status}! Попробуйте еще раз.`);
+        console.log(movie);
       })
 
   }
@@ -180,7 +178,7 @@ function App() {
       .delMovie(movie, localStorage.token)
       .then((res) => {
         const newFindMovies = likeMovies.filter((movieRes) => movieRes._id !== movie._id);
-        const newLikeFindMovies = likeMovies.filter((movieRes) => movieRes._id !== movie._id);
+        const newLikeFindMovies = likeMovies.filter((movieRes) => (movieRes._id !== movie._id) );
         setLikeMovies(newFindMovies);
         setFindLikeMovies(newLikeFindMovies);
       })
@@ -188,7 +186,7 @@ function App() {
         alert(`Ошибка ${err.status}! Попробуйте еще раз.`);
       });
   }
-
+ 
   useEffect(() => {
     checkToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -203,6 +201,7 @@ function App() {
   function showLikeMovies() {
     setSerche(false);
   }
+  const likeUser = likeMovies.filter((movieRes) => movieRes.owner === currentUser._id );
 
   return (
     <div className="root">
@@ -231,7 +230,7 @@ function App() {
             checkbox={shortCheckbox}
             moviesFind={findAllMovies}
             like={addMoviesLike}
-            likeMovies={likeMovies}
+            likeMovies={likeUser}
             deleteLike={deleteLike}
             notMovies={notMovies}
           />
@@ -241,10 +240,9 @@ function App() {
             component={SavedMovies}
             path='/saved-movies'
             loggedIn={loggedIn}
-            likeMovies={likeMovies}
+            likeMovies={likeUser}
             handleCheckbox={handleCheckbox}
             checkbox={shortCheckbox}
-            movies={likeMovies}
             moviesFind={findLikeMovies}
             deleteLike={deleteLike}
             searchMoviesButton={searchLikeMovies}

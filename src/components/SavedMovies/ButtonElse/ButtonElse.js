@@ -1,7 +1,11 @@
 import React from 'react';
 
 
-function ButtonElse({ movies, countMovies, more}) {
+function ButtonElse(props) {
+    const { 
+        movies, 
+        countMovies, 
+        more} = props;
     return (
         <div className='movies-button'>
             <button 
@@ -17,7 +21,7 @@ function ButtonElse({ movies, countMovies, more}) {
                 movies.length === 0
                     ? "movies-not__button"
                     : "movies-not__button_hidden"
-            }>Нет сохраненных фильмов</p>
+            }>Фильмы не найдены</p>
         </div>
     )
 }

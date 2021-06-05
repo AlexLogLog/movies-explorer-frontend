@@ -48,7 +48,7 @@ function MoviesCardList(props) {
                     notMovies &&
                     moviesFind.slice(0, countMovies).map((movie) =>
                         <MoviesCard
-                            key={movie._id}
+                            key={movie.id}
                             movie={movie}
                             like={like}
                             likeMovies={likeMovies}
