@@ -52,6 +52,7 @@ function Header({loggedIn, showLikeMovies}) {
                             <Link
                                 className="header__link-login header__link-login_no"
                                 to='/'
+                                onClick={() => handleUpdateSearch()}
                             >
                                 Главная
                         </Link>
@@ -70,6 +71,7 @@ function Header({loggedIn, showLikeMovies}) {
                             <Link
                                 className="header__profile-link"
                                 to='/profile'
+                                onClick={() => handleUpdateSearch()}
                             >
                                 Аккаунт
                     </Link>
