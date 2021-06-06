@@ -11,14 +11,13 @@ function MoviesCardList(props) {
         like,
         likeMovies,
         deleteLike,
-        loadAllMovies,
-        notMovies
+        loadAllMovies
     } = props;
 
-    
+
     const [countMovies, setCountCards] = React.useState(0);
     const [moreMovies, setMoreMovies] = React.useState(0);
-    
+
     const windowWidth = useWindowSize();
 
     function handleMoreBtnClick() {
@@ -26,7 +25,7 @@ function MoviesCardList(props) {
     }
 
     React.useEffect(() => {
-        if ( windowWidth >= 768) {
+        if (windowWidth >= 768) {
             setCountCards(12);
             setMoreMovies(3);
         }
@@ -41,11 +40,12 @@ function MoviesCardList(props) {
     }, [windowWidth]);
 
     return (
-        notMovies && <>
-        {loadAllMovies && <Preloader />}
+        // notMovies &&
+        <>
+            {loadAllMovies && <Preloader />}
             <div className="movies-list">
                 {
-                    notMovies &&
+                    // notMovies &&
                     moviesFind.slice(0, countMovies).map((movie) =>
                         <MoviesCard
                             key={movie.id}
@@ -56,7 +56,7 @@ function MoviesCardList(props) {
                         >
 
                         </MoviesCard>
-                    ) 
+                    )
                 }
 
             </div>

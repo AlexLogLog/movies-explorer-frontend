@@ -15,8 +15,7 @@ function Movies(props) {
         deleteLike,
         showLikeMovies,
         preloader,
-        loadAllMovies,
-        notMovies
+        loadAllMovies
     } = props;
     return (
         <>
@@ -33,7 +32,6 @@ function Movies(props) {
                 likeMovies={likeMovies}
                 deleteLike={deleteLike}
                 loadAllMovies={loadAllMovies}
-                notMovies={notMovies}
             />
             <Footer />
         </>

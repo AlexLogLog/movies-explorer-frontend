@@ -27,7 +27,6 @@ function App() {
   const [shortCheckbox, setShortCheckbox] = useState(false);
   const [searche, setSerche] = useState(false);
   const [loadAllMovies, setLoadAllMovies] = useState(false);
-  const [notMovies, setNotMoves] = useState(false);
 
 
   const history = useHistory();
@@ -50,9 +49,14 @@ function App() {
 
         ])
         .then(([moviesLikeList, moviesList, userInfo]) => {
-          setAllMovies(moviesList);
-          setLikeMovies(moviesLikeList);
+          localStorage.setItem("moviesList", JSON.stringify(moviesList));
+          setAllMovies(JSON.parse(localStorage.getItem("moviesList")));
+          localStorage.setItem("moviesLikeList", JSON.stringify(moviesLikeList));
+          setLikeMovies(JSON.parse(localStorage.getItem("moviesLikeList")));
           setCurrentUser(userInfo);
+
+          setFindAllMovies(JSON.parse(localStorage.getItem("allFindMovies")))
+          setFindLikeMovies(JSON.parse(localStorage.getItem("likeFindMovies")))
         })
         .catch((err) => {
           alert(`Ошибка ${err.status}! Попробуйте еще раз.`);
@@ -136,12 +140,12 @@ function App() {
   //поиск по фильмам
   function searchAllMovies(text) {
     if (shortCheckbox) {
-      setNotMoves(true);
       const allFindShortMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()) && (movie.duration <= 40))
+      localStorage.setItem("allFindMovies", JSON.stringify(allFindShortMovies));
       setFindAllMovies(allFindShortMovies);
     } else {
-      setNotMoves(true);
       const allFindMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()))
+      localStorage.setItem("allFindMovies", JSON.stringify(allFindMovies));
       setFindAllMovies(allFindMovies);
     }
   }
@@ -152,11 +156,13 @@ function App() {
       setSerche(true);
       const likeMoviesNotUser = likeMovies.filter((movieRes) => movieRes.owner === currentUser._id);
       const allFindShortMovies = likeMoviesNotUser.filter((movie) => (movie.nameRU.toLowerCase().includes(text.toLowerCase())) && (movie.duration <= 40))
+      localStorage.setItem("likeFindMovies", JSON.stringify(allFindShortMovies));
       setFindLikeMovies(allFindShortMovies);
     } else {
       setSerche(true);
       const likeMoviesNotUser = likeMovies.filter((movieRes) => movieRes.owner === currentUser._id);
-      const allFindMovies = likeMoviesNotUser.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()))
+      const allFindMovies = likeMoviesNotUser.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()));
+      localStorage.setItem("likeFindMovies", JSON.stringify(allFindMovies));
       setFindLikeMovies(allFindMovies);
     }
   }
@@ -165,10 +171,13 @@ function App() {
   function addMoviesLike(movie) {
     mainApi
       .newMovies(movie, localStorage.token)
-      .then((res) => setLikeMovies([...likeMovies, res]))
+      .then((res) => {
+        setLikeMovies([...likeMovies, res]);
+        localStorage.setItem("moviesLikeList", JSON.stringify([...likeMovies, res]))
+
+      })
       .catch((err) => {
         alert(`Ошибка ${err.status}! Попробуйте еще раз.`);
-        console.log(movie);
       })
 
   }
@@ -180,14 +189,17 @@ function App() {
       .then((res) => {
         const newFindMovies = likeMovies.filter((movieRes) => movieRes._id !== movie._id);
         const newLikeFindMovies = findLikeMovies.filter((movieRes) => (movieRes.owner === currentUser._id)).filter((movieRes) => (movieRes._id !== movie._id));
+        localStorage.setItem("moviesLikeList", JSON.stringify(newLikeFindMovies));
+
         setLikeMovies(newFindMovies);
+        localStorage.setItem("likeFindMovies", JSON.stringify(newLikeFindMovies));
         setFindLikeMovies(newLikeFindMovies);
       })
       .catch((err) => {
         alert(`Ошибка ${err.status}! Попробуйте еще раз.`);
       });
   }
- 
+
   useEffect(() => {
     checkToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -203,8 +215,7 @@ function App() {
   function showLikeMovies() {
     setSerche(false);
   }
-  const likeUser = likeMovies.filter((movieRes) => movieRes.owner === currentUser._id );
-
+  const likeUser = likeMovies.filter((movieRes) => movieRes.owner === currentUser._id);
   return (
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
@@ -234,7 +245,6 @@ function App() {
             like={addMoviesLike}
             likeMovies={likeUser}
             deleteLike={deleteLike}
-            notMovies={notMovies}
           />
 
           <ProtectedRoute

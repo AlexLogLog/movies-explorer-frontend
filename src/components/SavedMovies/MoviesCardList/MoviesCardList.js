@@ -38,7 +38,7 @@ function MoviesCardList(props) {
         }
     }, [windowWidth]);
     
-    if (!searche) {
+    if ((searche && moviesFind.lenght===0) ) {
         return (
             <>
                 <div className="movies-like">
@@ -86,7 +86,6 @@ function MoviesCardList(props) {
                     more={handleMoreBtnClick}
                     movies={moviesFind}
                     countMovies={countMovies}
-                    text='Не найдено'
                 />
 
             </>
