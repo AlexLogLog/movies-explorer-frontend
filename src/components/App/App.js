@@ -27,6 +27,7 @@ function App() {
   const [shortCheckbox, setShortCheckbox] = useState(false);
   const [searche, setSerche] = useState(false);
   const [loadAllMovies, setLoadAllMovies] = useState(false);
+  const [notMovies, setNotMovies] = useState(false);
 
 
   const history = useHistory();
@@ -54,9 +55,13 @@ function App() {
           localStorage.setItem("moviesLikeList", JSON.stringify(moviesLikeList));
           setLikeMovies(JSON.parse(localStorage.getItem("moviesLikeList")));
           setCurrentUser(userInfo);
-
-          setFindAllMovies(JSON.parse(localStorage.getItem("allFindMovies")))
-          setFindLikeMovies(JSON.parse(localStorage.getItem("likeFindMovies")))
+          if (localStorage.getItem("allFindMovies") !== '') {
+            setFindAllMovies(JSON.parse(localStorage.getItem("allFindMovies")))
+          }
+          if (localStorage.getItem("likeFindMovies") !== '') {
+            setFindLikeMovies(JSON.parse(localStorage.getItem("likeFindMovies")))
+            setSerche(true)
+          }
         })
         .catch((err) => {
           alert(`Ошибка ${err.status}! Попробуйте еще раз.`);
@@ -140,10 +145,12 @@ function App() {
   //поиск по фильмам
   function searchAllMovies(text) {
     if (shortCheckbox) {
+      setNotMovies(true);
       const allFindShortMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()) && (movie.duration <= 40))
       localStorage.setItem("allFindMovies", JSON.stringify(allFindShortMovies));
       setFindAllMovies(allFindShortMovies);
     } else {
+      setNotMovies(true);
       const allFindMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase().includes(text.toLowerCase()))
       localStorage.setItem("allFindMovies", JSON.stringify(allFindMovies));
       setFindAllMovies(allFindMovies);
@@ -174,7 +181,7 @@ function App() {
       .then((res) => {
         setLikeMovies([...likeMovies, res]);
         localStorage.setItem("moviesLikeList", JSON.stringify([...likeMovies, res]))
-
+        setSerche(false)
       })
       .catch((err) => {
         alert(`Ошибка ${err.status}! Попробуйте еще раз.`);
@@ -209,7 +216,9 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     setCurrentUser({});
-    history.push('/')
+    history.push('/');
+    localStorage.setItem("allFindMovies", [])
+    localStorage.setItem("likeFindMovies", [])
   }
 
   function showLikeMovies() {
@@ -245,6 +254,7 @@ function App() {
             like={addMoviesLike}
             likeMovies={likeUser}
             deleteLike={deleteLike}
+            notMovies={notMovies}
           />
 
           <ProtectedRoute

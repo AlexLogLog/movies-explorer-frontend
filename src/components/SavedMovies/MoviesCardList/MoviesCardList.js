@@ -13,7 +13,6 @@ function MoviesCardList(props) {
         searche
     } = props;
 
-
     const [countMovies, setCountCards] = React.useState(0);
     const [moreMovies, setMoreMovies] = React.useState(0);
 
@@ -38,7 +37,7 @@ function MoviesCardList(props) {
         }
     }, [windowWidth]);
     
-    if ((searche && moviesFind.lenght===0) ) {
+    if ((!searche  ) ) {
         return (
             <>
                 <div className="movies-like">
@@ -90,7 +89,7 @@ function MoviesCardList(props) {
 
             </>
         )
-    }
+    } 
 
 }
 

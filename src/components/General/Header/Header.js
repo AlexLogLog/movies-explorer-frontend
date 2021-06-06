@@ -8,9 +8,9 @@ function Header({ loggedIn, showLikeMovies }) {
     const { pathname } = useLocation();
     const history = useHistory();
 
-    function handleUpdateSearch() {
-        showLikeMovies();
-    }
+    // function handleUpdateSearch() {
+    //     showLikeMovies();
+    // }
     function link(from) {
         if ('/' === from) {
             if (!loggedIn) {
@@ -52,14 +52,14 @@ function Header({ loggedIn, showLikeMovies }) {
                             <Link
                                 className="header__link-login header__link-login_no"
                                 to='/'
-                                onClick={() => handleUpdateSearch()}
+                                // onClick={() => handleUpdateSearch()}
                             >
                                 Главная
                         </Link>
                             <Link
                                 className="header__link-login header__link-login_active"
                                 to='/movies'
-                                onClick={() => handleUpdateSearch()}
+                                // onClick={() => handleUpdateSearch()}
                             >
                                 Фильмы
                         </Link>
@@ -71,7 +71,7 @@ function Header({ loggedIn, showLikeMovies }) {
                             <Link
                                 className="header__profile-link"
                                 to='/profile'
-                                onClick={() => handleUpdateSearch()}
+                                // onClick={() => handleUpdateSearch()}
                             >
                                 Аккаунт
                     </Link>
@@ -91,7 +91,7 @@ function Header({ loggedIn, showLikeMovies }) {
             <img
                 onClick={() => {
                     history.push('/');
-                    handleUpdateSearch()
+                    // handleUpdateSearch()
                 }}
                 className="header__logo"
                 src={logo}
