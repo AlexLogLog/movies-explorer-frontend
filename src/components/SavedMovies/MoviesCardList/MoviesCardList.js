@@ -36,10 +36,9 @@ function MoviesCardList(props) {
             setMoreMovies(1);
         }
     }, [windowWidth]);
-    
-    if ((!searche  ) ) {
+    if ((!searche  || moviesFind === null) ) {
         return (
-            <>
+            likeMovies !== null && <>
                 <div className="movies-like">
                     {
 
@@ -65,7 +64,7 @@ function MoviesCardList(props) {
         )
     } else {
         return (
-            <>
+            moviesFind !== null && <>
                 <div className="movies-like">
                     {
 

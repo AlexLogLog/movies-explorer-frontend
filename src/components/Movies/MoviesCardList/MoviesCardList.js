@@ -12,7 +12,7 @@ function MoviesCardList(props) {
         likeMovies,
         deleteLike,
         loadAllMovies
-        } = props;
+    } = props;
 
 
     const [countMovies, setCountCards] = React.useState(0);
@@ -41,12 +41,12 @@ function MoviesCardList(props) {
 
     return (
         // notMovies ? 
-        <>
+        moviesFind !== null && <>
             {loadAllMovies && <Preloader />}
             <div className="movies-list">
-                {    
+                {
 
-                    moviesFind.slice(0, countMovies).map((movie) =>
+                     moviesFind.slice(0, countMovies).map((movie) =>
                         <MoviesCard
                             key={movie.id}
                             movie={movie}
@@ -56,7 +56,7 @@ function MoviesCardList(props) {
                         >
 
                         </MoviesCard>
-                    ) 
+                    )
                 }
 
             </div>

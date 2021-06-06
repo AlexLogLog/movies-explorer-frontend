@@ -60,7 +60,7 @@ function App() {
           }
           if (localStorage.getItem("likeFindMovies") !== '') {
             setFindLikeMovies(JSON.parse(localStorage.getItem("likeFindMovies")))
-            setSerche(true)
+            setSerche(false)
           }
         })
         .catch((err) => {
