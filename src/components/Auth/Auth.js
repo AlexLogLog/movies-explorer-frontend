@@ -9,7 +9,9 @@ function Auth(props) {
         submitButtonText,
         info,
         link,
-        linkName
+        linkName,
+        handleSubmit,
+        isValid
     } = props;
     const history = useHistory();
     return (
@@ -22,11 +24,20 @@ function Auth(props) {
                 alt="Логотип"
             ></img >
             <h1 className="auth__heading">{heading}</h1>
-            <form name="info" noValidate>
+            <form
+                name="info"
+                noValidate
+                onSubmit={handleSubmit}
+                action="#"
+            >
                 {children}
-                <button className="auth__button"
+                <button className={`${
+                    isValid ? "auth__button" : "auth__button auth__button_disabled"
+                  }`}
+                  disabled={`${
+                    isValid ? "" : "disabled"
+                  }`}
                     type="submit"
-                    onClick={() => history.push('/movies')}
                 > {submitButtonText}
                 </button>
                 <p className="auth__text">{info}

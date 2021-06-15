@@ -111,6 +111,10 @@
     color: #000000;
     padding-left: 48px;
 }
+.search__form-button_disabled {
+    opacity: 0.6;
+    cursor: default;
+}
 
 @media screen and (max-width:1139px) and (min-width: 768px) {
     .search {

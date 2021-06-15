@@ -18,7 +18,7 @@ function ButtonElse(props) {
                     Ещё
             </button>
             <p className={
-                movies.length === 0 
+                movies.length === 0
                     ? "movies-not__button"
                     : "movies-not__button_hidden"
             }>Фильмы не найдены</p>

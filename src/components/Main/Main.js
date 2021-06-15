@@ -7,12 +7,11 @@ import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 import Footer from '../General/Footer/Footer';
 
-function Main() {
-
+function Main({loggedIn, showLikeMovies}) {
     return (
         <>
             <div className="main__fon-baner">
-                <Header />
+                <Header loggedIn={loggedIn} showLikeMovies={showLikeMovies}/>
                 <Promo />
             </div>
             <AboutProject />

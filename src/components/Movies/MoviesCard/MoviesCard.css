@@ -9,8 +9,9 @@
 
 .card__img {
     width: 364px;
-    min-height: 200px;
+    height: 200px;
     margin: 0;
+    border-radius: 10px 10px 0 0 ;
 }
 
 .card__info {
@@ -48,6 +49,8 @@
 .card__info-butto_saved {
     background-image: url('../../../images/save.svg');
 }
+
+
 
 .card__info-time {
     font-family: Inter;

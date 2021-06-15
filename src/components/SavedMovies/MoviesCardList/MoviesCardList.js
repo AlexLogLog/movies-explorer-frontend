@@ -1,34 +1,95 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import film1 from '../../../images/1.png'
-import film2 from '../../../images/2.png'
-import film3 from '../../../images/3.png'
+import { useWindowSize } from '../../../utils/sizeWin'
+import ButtonElse from '../../Movies/ButtonElse/ButtonElse'
 
-function MoviesCardList() {
-    return (
-        <div className="movies-like">
-            <MoviesCard
-                img={film1}
-                name="33 слова о дизайне"
-                time="1ч 47м"
-            >
 
-            </MoviesCard>
-            <MoviesCard
-                img={film2}
-                name="Киноальманах «100 лет дизайна»"
-                time="1ч 3м"
-            >
 
-            </MoviesCard>
-            <MoviesCard
-                img={film3}
-                name="В погоне за Бенкси"
-                time="1ч 42м"
-            >
-            </MoviesCard>
-        </div>
-    )
+function MoviesCardList(props) {
+    const {
+        moviesFind,
+        deleteLike,
+        likeMovies,
+        searche
+    } = props;
+
+    const [countMovies, setCountCards] = React.useState(0);
+    const [moreMovies, setMoreMovies] = React.useState(0);
+
+    const windowWidth = useWindowSize();
+
+    function handleMoreBtnClick() {
+        setCountCards(countMovies + moreMovies);
+    }
+
+    React.useEffect(() => {
+        if (windowWidth >= 768) {
+            setCountCards(12);
+            setMoreMovies(3);
+        }
+        if (windowWidth < 768 && windowWidth >= 480) {
+            setCountCards(8);
+            setMoreMovies(2);
+        }
+        if (windowWidth < 480) {
+            setCountCards(5);
+            setMoreMovies(1);
+        }
+    }, [windowWidth]);
+    if ((!searche  || moviesFind === null) ) {
+        return (
+            likeMovies !== null && <>
+                <div className="movies-like">
+                    {
+
+                        likeMovies.slice(0, countMovies).map((movie) =>
+                            <MoviesCard
+                                key={movie._id}
+                                movie={movie}
+                                deleteLike={deleteLike}
+                            >
+
+                            </MoviesCard>
+                        )
+                    }
+
+                </div>
+                <ButtonElse
+                    more={handleMoreBtnClick}
+                    movies={likeMovies}
+                    countMovies={countMovies}
+                />
+
+            </>
+        )
+    } else {
+        return (
+            moviesFind !== null && <>
+                <div className="movies-like">
+                    {
+
+                        moviesFind.slice(0, countMovies).map((movie) =>
+                            <MoviesCard
+                                key={movie._id}
+                                movie={movie}
+                                deleteLike={deleteLike}
+                            >
+
+                            </MoviesCard>
+                        )
+                    }
+
+                </div>
+                <ButtonElse
+                    more={handleMoreBtnClick}
+                    movies={moviesFind}
+                    countMovies={countMovies}
+                />
+
+            </>
+        )
+    } 
+
 }
 
 export default MoviesCardList;
